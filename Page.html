@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <script src="./jquery.min.js"></script>
@@ -51,9 +51,17 @@ footer {
 	visibility : hidden
 }
 </style>
+<!-- <link rel="stylesheet" type="text/css" href="Tabs Style.css" /> -->
 <title>Générateur JCC Pokémon</title>
 </head>
 <body onload="clr();" style="border:2px solid yellow">
+<!-- <div class="tab"> -->
+<!-- <button id="Pokémon">Carte Pokémon</button> -->
+<!-- <button id="Objets">Carte Objet</button> -->
+<!-- <button id="Dresseur">Carte Dresseur</button> -->
+<!-- </div> -->
+<!-- TODO : mettre l'apparence à jour -->
+<div class="tabcontent Pokémon">
 <div style="border:2px solid yellow; background:lightgray; text-align:center;border-top:none">Remarque : ce générateur ne prend actuellement en compte que les cartes de catégorie Pokémon.</div>
 Ruban Carte JCC
 <table id="ruban">
@@ -100,6 +108,9 @@ Catégorie 1<sup>er</sup> emplacement <select id="firstCap" onload="eventFire(th
 <small><p style="text-align:right; padding-right:20px;"><a href="http://www.pokepedia.fr/Discussion_utilisateur:N_tonio36">Service après-vente</a></p></small></footer>
 <script src="./Gestion.js"></script>
 <script src="./Production.js"></script>
-<!-- Dernière révision : le 22 septembre 2017 (v1.10.10) -->
+</div>
+<div class="tabcontent Objets"></div>
+<div class="tabcontent Dresseur"></div>
+<!-- Dernière révision : le 24 septembre 2017 (v1.10.11) -->
 </body>
 </html>
