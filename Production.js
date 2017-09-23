@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Générateur de cartes JCC Pokémon
 * Là où tout se fait
 */
@@ -77,7 +77,7 @@ function Generate(){
 					default : "";
 			}
 		}
-		if(canSpot2){
+		if((canSpot2 && !canSpot1) || (canSpot2 && ["Talent","Cap.Spé."].indexOf(typeCap1) !== -1)){
 		Text +="* [["+document.getElementById("Nom2").value + "]] est une [[Capacité|attaque]] des jeux vidéo que " + nom + " peut apprendre."; 
 		}
 	}
