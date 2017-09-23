@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Générateur de cartes JCC Pokémon
 * Département de "décoration" (reste essentiel pour la bonne génération du code)
 */
@@ -194,8 +194,11 @@ var MaxSetCarte = {
 	"XY Impact des Destins" : 124,
 	"XY Offensive Vapeur" : 114,
 	"XY Évolutions" : 108,
-	
-}
+	"Soleil et Lune" : 149,
+	"Soleil et Lune Gardiens Ascendants" : 145,
+	"Soleil et Lune Ombres Ardentes" : 147,
+};
+
 var EngExt = {
 	"Noir & Blanc Tempête Plasma" : "Plasma Storm",
 	"Noir & Blanc Explosion Plasma" : "Plasma Explosion",
@@ -214,6 +217,9 @@ var EngExt = {
 	"XY Impact des Destins" : "Fates Collide",
 	"XY Offensive Vapeur" : "Steam Siege",
 	"XY Évolutions" : "Evolutions",
+	"Soleil et Lune" : "Sun & Moon",
+	"Soleil et Lune Gardiens Ascendants" : "Guardians Rising",
+	"Soleil et Lune Ombres Ardentes" : "Burning Shadows",
 	"" : ""
 };
 
