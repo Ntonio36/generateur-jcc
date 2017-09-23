@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<script src="./jquery.min.js"></script>
+<meta charset="UTF-8">
+<style>
+.num {
+	width:48px; <!-- Suffisant pour 3 chiffres, soit le max possible -->
+}
+#ruban {
+	background:gray;
+	width:95%;
+	border:2px solid black;
+}
+.précédent {
+	border-right : 3px solid black;
+	padding-left : 50px;
+}
+.suivant {
+	border-left : 3px solid black;
+}
+#ruban td {
+padding-left : 50px;
+}
+.title {
+	border-right : 1px solid black;
+	border-left : 1px solid black;
+	padding-right : 5px;
+}
+.top {
+	border-top: 1px solid black;
+}
+.bottom {
+	border-bottom: 1px solid black;
+}
+.num {
+	width:48px;
+}
+footer {
+	text-align : center;
+	font-size : 15px;
+	background-color : skyblue;
+}
+.showarrow {
+	font-size : 20px;
+}
+.box {
+	border:3px solid black;
+}
+#foreveralone {
+	visibility : hidden
+}
+</style>
+<title>Générateur JCC Pokémon</title>
+</head>
+<body onload="clr();" style="border:2px solid yellow">
+<div style="border:2px solid yellow; background:lightgray; text-align:center;border-top:none">Remarque : ce générateur ne prend actuellement en compte que les cartes de catégorie Pokémon.</div>
+Ruban Carte JCC
+<table id="ruban">
+<tr><td class="précédent"><span class="showarrow">←</span> <input id="Nom_Précédent" placeholder="Précédent" /></td><td><input id="Extension" style="align:center;width:180px" placeholder="Extension" /></td><td class="suivant"><input id="Nom_Suivant" placeholder="Suivant" /> <span class="showarrow">→</span></td></tr>
+</table>
+
+<table style="display:block"><tr><td>
+Infobox Carte <input type="checkbox" id="EX" /> Pokémon-EX
+<table name="infobox carte" id="infobox_carte" style="border:skyblue 3px solid">
+<tr><td class="top title">Nom</td><td><input id="Nom" /></td></tr>
+<tr><td class="title">Nom Anglais</td><td><input id="Nom_Eng" /></td></tr>
+<tr><td class="title">Nom Japonais</td><td><input id="Nom_Jap" /></td></tr>
+<tr><td class="title">Numéro Carte</td><td><input id="Numéro_carte" class="num" /></td></tr>
+<tr><td class="title">Numéro Carte Max</td><td><input id="Numéro_carte_max" class="num" /></td></tr>
+<tr><td class="title">Type</td><td><select id="Type"><option></option><option>Feu</option><option>Eau</option><option>Plante</option><option>Combat</option><option>Fée</option><option>Obscurité</option><option>Électrique</option><option>Métal</option><option>Incolore</option><option>Dragon</option><option>Psy</option></select></td></tr>
+<tr><td class="title">PV</td><td><input class="num" id="PV" /></td></tr>
+<tr><td class="title">Faiblesse</td><td><select id="Faiblesse"><option></option><option>Feu</option><option>Eau</option><option>Plante</option><option>Combat</option><option>Fée</option><option>Obscurité</option><option>Électrique</option><option>Métal</option><option>Incolore</option><option>Dragon</option><option>Psy</option></select><input type="checkbox" id="Faiblesse_Défaut" /> Valeur par défaut (×2)</td></tr>
+<tr id="placehold_faiblesse"><td class="title">Valeur</td><td><input id="Faiblesse_Val" class="num" /></td></tr>
+<tr><td class="title">Résistance</td><td><select id="Résistance"><option></option><option>Feu</option><option>Eau</option><option>Plante</option><option>Combat</option><option>Fée</option><option>Obscurité</option><option>Électrique</option><option>Métal</option><option>Incolore</option><option>Dragon</option><option>Psy</option></select><input type="checkbox" id="Résistance_Défaut" /> Valeur par défaut (-20)</td></tr>
+<tr id="placehold_résistance"><td class="title">Valeur</td><td><input id="Résistance_Val" class="num" /></td></tr>
+<tr><td class="title">Stade</td><td><select id="Evo"><option></option><option>Base</option><option>1</option><option>2</option></select><span id="Middle" style="visibility:hidden"><span id="middle_show"><input type="checkbox" id="middle_confirm" /> Intermédiaire</span> <input id="preEvoName" placeholder="Nom pré-évolution" title="Inclure le numéro de la pré-évolution ex: Pichu 36" /></span></td></tr>
+<tr><td class="title">Retraite</td><td><select id="Retraite"><option></option><option>0</option><option>1</option><option>2</option><option>3</option><option>4</option></select></td></tr>
+<tr><td class="title">Rareté</td><td><select id="Rareté"><option></option><option>Commune</option><option>Peu commune</option><option>Rare</option><option>Holographique</option><option>Ultra rare</option></select></td></tr>
+<tr><td class="bottom title">Illustrateur</td><td><input id="Illustrateur" /></td></tr>
+</table>
+<tr><td>
+Catégorie 1<sup>er</sup> emplacement <select id="firstCap" onload="eventFire(this.id,'click')" onclick="editSpan();"><option></option><option id="changeable">Cap.Spé./Talent</option><option>Attaque</option></select> <input type="checkbox" id="secondSpot" /> Disponibilité 2ème emplacement
+</td></tr>
+<tr id="AtksSpot1"><td></td></tr>
+<tr id="AtksSpot2"><td></td></tr>
+<tr id="PkmnDesc"><td><textarea placeholder="Description du Pokémon" cols=40 id="pkmn_desc"></textarea>	Correspond à <select id="version"><option></option><option value="N">Pokémon Noir</option><option value="Blc">Pokémon Blanc</option><option value="NB">Pokémon Noir et Blanc</option><option value="N2">Pokémon Noir 2</option><option value="B2">Pokémon Blanc 2</option><option value="NB2">Pokémon Noir et Blanc 2</option><option value="X">Pokémon X</option><option value="Y">Pokémon Y</option><option value="XY">Pokémon X et Y</option></select></td></tr>
+<tr id="Remarques"><td><ul><li><input type="checkbox" disabled="disabled" id="Spot1Obtainable" /> <span id="emplacement1_type">(Choisir la catégorie)</span></li>
+							<li><input disabled="disabled" type="checkbox" id="Spot2Obtainable" /> <span id="2ndSpotText">Attaque 2</span> apprenable</li>
+							</ul></td></tr>
+<tr id="Additional_Options"><td><input id="autolinks" type="checkbox" /> Obtenir les liens interwiki automatiquement</td></tr>
+<tr><td><button onclick="Generate()">Générer</button></td></tr>
+<tr id="compileResult"><td></td></tr>
+<tr id="ajaxCallWait"><td id="ajaxShowStatus"></td></tr>
+<tr><td id="showNotice"></td></tr>
+</table>
+<span id="foreveralone">Ce texte est uniquement présent pour réserver de l'espace et ne pas créer de confusion.</span> <!-- Les plus utiles sont parfois les plus ignorés ! (merci poto)  -->
+<!--Pour faire plus sérieux (mais en réalité on peut passer) -->
+<footer>Copyright <a href="http://www.pokepedia.fr/Utilisateur:N_tonio36">N_tonio36</a> &copy; 2017-<span id="currentyear">2017</span> - Tous droits réservés.<br />
+<small><p style="text-align:right; padding-right:20px;"><a href="http://www.pokepedia.fr/Discussion_utilisateur:N_tonio36">Service après-vente</a></p></small></footer>
+<script src="./Gestion.js"></script>
+<script src="./Production.js"></script>
+<!-- Dernière révision : le 22 septembre 2017 (v1.10.10) -->
+</body>
+</html>
