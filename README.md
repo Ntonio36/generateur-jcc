@@ -1,7 +1,7 @@
 # Générateur Wikicode JCC
 Générateur wikicode JCC pour Poképédia
 
-Rien de plus simple, il faut juste faire attention à ne rien casser : cliquez sur Clone or Download juste à droite, téléchargez le .zip, extractez son contenu et utilisez Page.
+Rien de plus simple, il faut juste faire attention à ne rien casser : cliquez sur Clone or Download juste à droite, téléchargez le .zip, extrayez son contenu et utilisez Page.
 
 Remarque importante : Ne pas utiliser Microsoft Edge ni Internet Explorer. 1er avertissement.
 
