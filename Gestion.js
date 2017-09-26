@@ -4,6 +4,8 @@
 */
 var typeCap1 = "";
 
+var extensionsExistantes = ["Noir & Blanc Tempête Plasma","Noir & Blanc Explosion Plasma","Noir & Blanc Glaciation Plasma","XY","XY Bienvenue à Kalos","XY Étincelles","XY Poings Furieux","XY Primo Choc","XY Vigueur Spectrale","XY Ciel Rugissant","XY Origines Antiques","XY Impulsion TURBO","XY Rupture TURBO","Générations","XY Impact des Destins","XY Offensive Vapeur","XY Évolutions","Soleil et Lune","Soleil et Lune Gardiens Ascendants","Soleil et Lune Ombres Ardentes","Promo BW","Promo SL","Promo XY"];
+
 function editSpan(){
 	 toggleGray(["Talent","Cap.Spé.","Attaque"].indexOf(document.getElementById("firstCap").value) == -1,"#Spot1Obtainable");
 	switch(document.getElementById("firstCap").value){
@@ -21,18 +23,14 @@ function editSpan(){
 	generateSpot(1);
 }
 
-$("input[name='xybw']").click(function(){
-	document.getElementById("changeable").innerHTML = this.id;
-});
-
-document.getElementById("EX").addEventListener("click",function(){
-	toggleGray(this.checked,"#pkmn_desc, #Evo, #version, #Rareté");
+$("#EX, #GX, #None").click(function(){
+	toggleGray($(this).prop("checked").prop("id") === "EX" || $(this).prop("checked").prop("id") === "GX","#pkmn_desc, #Evo, #version, #Rareté");
 });
 
 function checkSeries(){
 	var extension = document.getElementById("Extension");
 	var valeur_extension = extension.value;
-	if(!xor(extension.value.indexOf("Noir & Blanc") !== -1,extension.value.indexOf("XY") !== -1) && valeur_extension.indexOf("Soleil et Lune") === -1){
+	if(extensionsExistantes.indexOf(valeur_extension) === -1){
 		// Si l'user se trompe d'orthographe de série
 		alert("Merci de choisir/corriger l'extension");
 		$(extension).css("background-color","lightgreen");
@@ -42,14 +40,11 @@ function checkSeries(){
 		});
 	}
 	else {
-		switch(-1){
-			case valeur_extension.indexOf("Noir & Blanc") : document.getElementById("changeable").innerHTML = "Talent";
-			break;
-			case valeur_extension.indexOf("XY") :
-			case valeur_extension.indexOf("Soleil et Lune") :
+		if(valeur_extension.indexOf("Noir & Blanc") !== -1 || valeur_extension.indexOf("BW") !== -1){
 			document.getElementById("changeable").innerHTML = "Cap.Spé.";
-			break;
-			default : "";
+		}
+		else if(valeur_extension.indexOf("SM") !== -1 || valeur_extension.indexOf("XY") !== -1 || valeur_extension.indexOf("Soleil et Lune") !== -1){
+			document.getElementById("changeable").innerHTML = "Talent";
 		}
 	}
 }
@@ -77,6 +72,7 @@ var allElements = [];
 
 $("#secondSpot").click(function(){
 	if($(this).prop("checked")){
+		clearTDs(2);
 		generateSpot(2);
 	}
 	else {
@@ -85,9 +81,21 @@ $("#secondSpot").click(function(){
 	toggleGray(!this.checked,"#Spot2Obtainable");
 });
 
-function generateSpot(position){	//Mettre 1 ou 2, en fonction de l'emplacement sur la carte
-	var allElements = [];
+$("input[name='powerup']").click(function(){
+	if(this.id === "GX"){
+		$("#GX_move").prop("checked","checked");
+		clearTDs("GX");
+		generateSpot("GX");
+	}
+	else {
+		clearTDs("GX");
+		$("#GX_move").prop("checked","");
+	}
+});
+
+function generateSpot(position){	//Mettre 1 ou 2 voire GX, en fonction de l'emplacement sur la carte
 	clearTDs(position);
+	var allElements = [];
 	if(position === 1){
 		var nom1 = document.createElement("input");
 		nom1.placeholder = "Nom";
@@ -128,13 +136,33 @@ function generateSpot(position){	//Mettre 1 ou 2, en fonction de l'emplacement s
 		desc2.cols = 60;
 		var type2 = document.createElement("input");
 		type2.id = "Type2";
-		type2.placeholder = "Type";
+		type2.placeholder = "Types";
 		var dégâts2 = document.createElement("input");
 		dégâts2.id = "Dégâts2";
 		dégâts2.placeholder = "Dégâts";
 		allElements = [type2,nom2,desc2,dégâts2];
 		for(i = 0; i < allElements.length; i++){
 			document.getElementById("AtksSpot2").firstChild.appendChild(allElements[i]);
+		}
+	}
+	else if(position === "GX"){
+		var nomGX = document.createElement("input");
+		nomGX.placeholder = "Nom capacité GX";
+		nomGX.id = "NomGX";
+		var descGX = document.createElement("textarea");
+		descGX.placeholder = "Description capacité GX";
+		descGX.id = "DescGX";
+		descGX.rows = 6;
+		descGX.cols = 60;
+		var typeGX = document.createElement("input");
+		typeGX.id = "TypeGX";
+		typeGX.placeholder = "Types";
+		var dégâtsGX = document.createElement("input");
+		dégâtsGX.id = "DégâtsGX";
+		dégâtsGX.placeholder = "Dégâts";
+		allElements = [typeGX,nomGX,descGX,dégâtsGX];
+		for(i = 0; i < allElements.length; i++){
+			document.getElementById("AtksSpotGX").firstChild.appendChild(allElements[i]);
 		}
 	}
 }
@@ -226,7 +254,7 @@ var EngExt = {
 };
 
 function clr(){
-	$('input:checkbox').prop("checked",false);
+	$('input:checkbox, input:radio').prop("checked",false);
 	$("select, input, textarea").val("");
 }
 function littleclr(){
@@ -237,6 +265,15 @@ var bulbaInterwikiRegex = /\[\[[de|zh|ja]{2}:.{1,}?\]\]/g // [[de:Kyurem Blanc e
 
 function getInterwiki(kind){
 	var modifier = kind==="Pokémon"?"":"_dres";
+	function getPowerUp(){
+		if(isEX){
+			return "-EX";
+		}
+		else if(isGX){
+			return "-GX";
+		}
+		else return "";
+	}
 	var nomAnglais = document.getElementById("Nom_Eng").value;
 	var Y = "";
 	var extension = document.getElementById("Extension"+modifier).value;
@@ -244,7 +281,7 @@ function getInterwiki(kind){
 	$.ajax({
 		type: "GET",
 		url: 'http://whateverorigin.org/get?url=' + 
-		encodeURIComponent('http://bulbapedia.bulbagarden.net/wiki/'+(nomAnglais+(isEX?"-EX":"")+"_("+EnglishExtension+"_"+document.getElementById("Numéro_carte"+modifier).value+")?action=edit")) + '&callback=?',
+		encodeURIComponent('http://bulbapedia.bulbagarden.net/wiki/'+(nomAnglais+getPowerUp()+"_("+EnglishExtension+"_"+document.getElementById("Numéro_carte"+modifier).value+")?action=edit")) + '&callback=?',
 		dataType: "jsonp",
 		success : function( data ) {
 			var X = extractContent(data.contents);
@@ -269,10 +306,6 @@ function getInterwiki(kind){
 document.getElementById("foreveralone").addEventListener("click",function(){ // trollolol
 		document.getElementById("Result").value += this.innerHTML;
 		document.getElementById("ajaxShowStatus").innerHTML = "Prêt !";
-});
-document.getElementById("foreveralone_dres").addEventListener("click",function(){ // trollolol
-		document.getElementById("effet_carte").value += this.innerHTML;
-		document.getElementById("showAjaxTrainer").innerHTML = "Prêt !";
 });
 
 function xor(arg1,arg2){
