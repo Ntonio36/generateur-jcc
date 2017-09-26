@@ -1,73 +1,23 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 <script src="./jquery.min.js"></script>
 <meta charset="UTF-8">
-<style>
-.num {
-	width:48px; <!-- Suffisant pour 3 chiffres, soit le max possible -->
-}
-#ruban {
-	background:gray;
-	width:95%;
-	border:2px solid black;
-}
-.précédent {
-	border-right : 3px solid black;
-	padding-left : 50px;
-}
-.suivant {
-	border-left : 3px solid black;
-}
-#ruban td {
-padding-left : 50px;
-}
-.title {
-	border-right : 1px solid black;
-	border-left : 1px solid black;
-	padding-right : 5px;
-}
-.top {
-	border-top: 1px solid black;
-}
-.bottom {
-	border-bottom: 1px solid black;
-}
-.num {
-	width:48px;
-}
-footer {
-	text-align : center;
-	font-size : 15px;
-	background-color : skyblue;
-}
-.showarrow {
-	font-size : 20px;
-}
-.box {
-	border:3px solid black;
-}
-#foreveralone {
-	visibility : hidden
-}
-</style>
-<!-- <link rel="stylesheet" type="text/css" href="Tabs Style.css" /> -->
+<link rel="stylesheet" type="text/css" href="Style.css" />
+<link rel="icon" type="image/png" href="miniat Kyurem Blanc.png" />
 <title>Générateur JCC Pokémon</title>
 </head>
-<body onload="clr();" style="border:2px solid yellow">
-<!-- <div class="tab"> -->
-<!-- <button id="Pokémon">Carte Pokémon</button> -->
-<!-- <button id="Objets">Carte Objet</button> -->
-<!-- <button id="Dresseur">Carte Dresseur</button> -->
-<!-- </div> -->
-<!-- TODO : mettre l'apparence à jour -->
-<div class="tabcontent Pokémon">
-<div style="border:2px solid yellow; background:lightgray; text-align:center;border-top:none">Remarque : ce générateur ne prend actuellement en compte que les cartes de catégorie Pokémon.</div>
-Ruban Carte JCC
-<table id="ruban">
+<body onload="clr();">
+<div class="tabs">
+    <ul class="tab-links">
+        <li id="toGrab"><a href="#Pokémon" onclick="littleclr()">Carte Pokémon</a></li>
+        <li><a href="#Dresseur" onclick="littleclr()">Carte Dresseur</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="Pokémon" class="tab">
+		<table id="ruban">
 <tr><td class="précédent"><span class="showarrow">←</span> <input id="Nom_Précédent" placeholder="Précédent" /></td><td><input id="Extension" style="align:center;width:180px" placeholder="Extension" /></td><td class="suivant"><input id="Nom_Suivant" placeholder="Suivant" /> <span class="showarrow">→</span></td></tr>
 </table>
-
 <table style="display:block"><tr><td>
 Infobox Carte <input type="checkbox" id="EX" /> Pokémon-EX
 <table name="infobox carte" id="infobox_carte" style="border:skyblue 3px solid">
@@ -97,20 +47,54 @@ Catégorie 1<sup>er</sup> emplacement <select id="firstCap" onload="eventFire(th
 							<li><input disabled="disabled" type="checkbox" id="Spot2Obtainable" /> <span id="2ndSpotText">Attaque 2</span> apprenable</li>
 							</ul></td></tr>
 <tr id="Additional_Options"><td><input id="autolinks" type="checkbox" /> Obtenir les liens interwiki automatiquement</td></tr>
-<tr><td><button onclick="Generate()">Générer</button></td></tr>
+<tr><td><button onclick="GeneratePokémon()">Générer</button></td></tr>
 <tr id="compileResult"><td></td></tr>
 <tr id="ajaxCallWait"><td id="ajaxShowStatus"></td></tr>
 <tr><td id="showNotice"></td></tr>
 </table>
 <span id="foreveralone">Ce texte est uniquement présent pour réserver de l'espace et ne pas créer de confusion.</span> <!-- Les plus utiles sont parfois les plus ignorés ! (merci poto)  -->
+<script src="./Production Pokémon.js"></script>
+</div>
+<div id="Dresseur" class="tab">
+<table id="ruban">
+<tr><td class="précédent"><span class="showarrow">←</span> <input id="Nom_Précédent_dres" placeholder="Précédent" /></td><td><input id="Extension_dres" style="align:center;width:180px" placeholder="Extension" /></td><td class="suivant"><input id="Nom_Suivant_dres" placeholder="Suivant" /> <span class="showarrow">→</span></td></tr>
+</table>
+<table style="display:block"><tr><td>
+Infobox Carte
+<table name="infobox carte" id="infobox_carte" style="border:skyblue 3px solid">
+<tr><td class="top title">Nom</td><td><input id="Nom_dres" /></td></tr>
+<tr><td class="title">Nom Anglais</td><td><input id="Nom_Eng_dres" /></td></tr>
+<tr><td class="title">Nom Japonais</td><td><input id="Nom_Jap_dres" /></td></tr>
+<tr><td class="title">Numéro Carte</td><td><input id="Numéro_carte_dres" class="num" /></td></tr>
+<tr><td class="title">Numéro Carte Max</td><td><input id="Numéro_carte_max_dres" class="num" /></td></tr>
+<tr><td class="title">Catégorie</td><td><select id="Catégorie_dres"><option></option><option>Supporter</option><option>Objet</option><option>Stade</option><option>Outil Pokémon</option><option>HIGH TECH</option></select></td></tr>
+<tr><td class="title">Rareté</td><td><select id="Rareté_dres"><option></option><option>Commune</option><option>Peu commune</option><option>Rare</option><option>Holographique</option><option>Ultra rare</option></select></td></tr>
+<tr><td class="bottom title">Illustrateur</td><td><input id="Illustrateur_dres" /></td></tr>
+</table>
+<tr><td>Effet</td></tr>
+<tr><td><textarea id="effet_carte" cols=50 rows=5></textarea></td></tr>
+<tr><td><button onclick="GenerateTrainer()">Générer</button></td></tr>
+<tr><td id="showTextarea"></td></tr>
+<tr><td id="showAjaxTrainer"></td></tr>
+<tr><td id="showNoticeTrainer"></td></tr>
+</table>
+<span id="foreveralone_dres">Rôle identique à celui présent dans la catégorie Pokémon</span>
+<script src="./Production Dresseur.js"></script>
+</div>
+</div>
+</div>
+<span id="showmessage">Pour commencer, cliquez sur une catégorie de carte.</span>
+<script>
+document.addEventListener("click",function(){
+	if(document.getElementsByClassName("active").length){
+		document.getElementById("showmessage").innerHTML = "";
+	}
+});
+</script>
 <!--Pour faire plus sérieux (mais en réalité on peut passer) -->
 <footer>Copyright <a href="http://www.pokepedia.fr/Utilisateur:N_tonio36">N_tonio36</a> &copy; 2017-<span id="currentyear">2017</span> - Tous droits réservés.<br />
 <small><p style="text-align:right; padding-right:20px;"><a href="http://www.pokepedia.fr/Discussion_utilisateur:N_tonio36">Service après-vente</a></p></small></footer>
+<!-- Dernière révision : le 25 septembre 2017 (v1.11) -->
 <script src="./Gestion.js"></script>
-<script src="./Production.js"></script>
-</div>
-<div class="tabcontent Objets"></div>
-<div class="tabcontent Dresseur"></div>
-<!-- Dernière révision : le 24 septembre 2017 (v1.10.11) -->
 </body>
 </html>

@@ -32,7 +32,7 @@ document.getElementById("EX").addEventListener("click",function(){
 function checkSeries(){
 	var extension = document.getElementById("Extension");
 	var valeur_extension = extension.value;
-	if(!xor(extension.value.indexOf("Noir & Blanc") !== -1,extension.value.indexOf("XY") !== -1)){
+	if(!xor(extension.value.indexOf("Noir & Blanc") !== -1,extension.value.indexOf("XY") !== -1) && valeur_extension.indexOf("Soleil et Lune") === -1){
 		// Si l'user se trompe d'orthographe de série
 		alert("Merci de choisir/corriger l'extension");
 		$(extension).css("background-color","lightgreen");
@@ -45,7 +45,9 @@ function checkSeries(){
 		switch(-1){
 			case valeur_extension.indexOf("Noir & Blanc") : document.getElementById("changeable").innerHTML = "Talent";
 			break;
-			case valeur_extension.indexOf("XY") : document.getElementById("changeable").innerHTML = "Cap.Spé.";
+			case valeur_extension.indexOf("XY") :
+			case valeur_extension.indexOf("Soleil et Lune") :
+			document.getElementById("changeable").innerHTML = "Cap.Spé.";
 			break;
 			default : "";
 		}
@@ -225,20 +227,24 @@ var EngExt = {
 
 function clr(){
 	$('input:checkbox').prop("checked",false);
-	$('input:radio').prop("checked",false);
 	$("select, input, textarea").val("");
 }
-
+function littleclr(){
+	clr;
+	$("#Result, #Result_dres").remove();
+}
 var bulbaInterwikiRegex = /\[\[[de|zh|ja]{2}:.{1,}?\]\]/g // [[de:Kyurem Blanc est le meilleur 36]]
 
-function getInterwiki(){
+function getInterwiki(kind){
+	var modifier = kind==="Pokémon"?"":"_dres";
+	var nomAnglais = document.getElementById("Nom_Eng").value;
 	var Y = "";
-	var extension = document.getElementById("Extension").value;
+	var extension = document.getElementById("Extension"+modifier).value;
 	var EnglishExtension = EngExt[extension].replace(/ /,"_");
 	$.ajax({
 		type: "GET",
 		url: 'http://whateverorigin.org/get?url=' + 
-		encodeURIComponent('http://bulbapedia.bulbagarden.net/wiki/'+(nomAnglais+(isEX?"-EX":"")+"_("+EnglishExtension+"_"+document.getElementById("Numéro_carte").value+")?action=edit")) + '&callback=?',
+		encodeURIComponent('http://bulbapedia.bulbagarden.net/wiki/'+(nomAnglais+(isEX?"-EX":"")+"_("+EnglishExtension+"_"+document.getElementById("Numéro_carte"+modifier).value+")?action=edit")) + '&callback=?',
 		dataType: "jsonp",
 		success : function( data ) {
 			var X = extractContent(data.contents);
@@ -248,21 +254,25 @@ function getInterwiki(){
 				alert("Merci de revérifier le nom anglais, l'extension et le numéro");
 			}
 			else {
-				takenLinks.splice(1,0,"[[en:"+(nomAnglais+(isEX?"-EX":""))+" ("+EnglishExtension.replace(/_/g," ")+" "+document.getElementById("Numéro_carte").value+")]]"); // Insertion de l'interwiki anglais
+				takenLinks.splice(1,0,"[[en:"+(nomAnglais+(isEX?"-EX":""))+" ("+EnglishExtension.replace(/_/g," ")+" "+document.getElementById("Numéro_carte"+modifier).value+")]]"); // Insertion de l'interwiki anglais
 				Y = takenLinks.toString().replace(/,/g,"\n");
-				document.getElementById("foreveralone").innerHTML = Y;
-				eventFire(document.getElementById("foreveralone"),"click"); // dummy pour activer la sortie des liens
+				document.getElementById("foreveralone"+modifier).innerHTML = Y;
+				eventFire(document.getElementById("foreveralone"+modifier),"click"); // dummy pour activer la sortie des liens
 			}
 		},
 		failure : function(){
-			document.getElementById("ajaxShowStatus").innerHTML = "<font style='color:red'>Erreur.</font>";
+			alert("Erreur");
 		}
 	});
 }
 
 document.getElementById("foreveralone").addEventListener("click",function(){ // trollolol
 		document.getElementById("Result").value += this.innerHTML;
-		document.getElementById("ajaxShowStatus").innerHTML = "Prêt !"; // le wikicode est tout chaud, c'est bon
+		document.getElementById("ajaxShowStatus").innerHTML = "Prêt !";
+});
+document.getElementById("foreveralone_dres").addEventListener("click",function(){ // trollolol
+		document.getElementById("effet_carte").value += this.innerHTML;
+		document.getElementById("showAjaxTrainer").innerHTML = "Prêt !";
 });
 
 function xor(arg1,arg2){
@@ -295,3 +305,20 @@ function replaceX(where){
 	where = where.replace("x","×");
 	return where;
 }
+
+$(document).ready(function() {
+    $('.tabs .tab-links a').on('click', function(e)  {
+        var currentAttrValue = $(this).attr('href');
+ 
+        // Show/Hide Tabs
+        $('.tabs ' + currentAttrValue).show().siblings().hide();
+ 
+        // Change/remove current tab to active
+        $(this).parent('li').addClass('active').siblings().removeClass('active');
+ 
+        e.preventDefault();
+    });
+});
+var yr = (1900+new Date().getYear()); // 1900 + 117 = 2017 *je le jure*
+
+document.getElementById("currentyear").innerHTML = yr; // Au cas où si ça survit au-delà du 31 décembre 2017
