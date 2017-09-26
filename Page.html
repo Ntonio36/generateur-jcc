@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <script src="./jquery.min.js"></script>
@@ -19,7 +19,7 @@
 <tr><td class="précédent"><span class="showarrow">←</span> <input id="Nom_Précédent" placeholder="Précédent" /></td><td><input id="Extension" style="align:center;width:180px" placeholder="Extension" /></td><td class="suivant"><input id="Nom_Suivant" placeholder="Suivant" /> <span class="showarrow">→</span></td></tr>
 </table>
 <table style="display:block"><tr><td>
-Infobox Carte <input type="checkbox" id="EX" /> Pokémon-EX
+Infobox Carte <input type="radio" name="powerup" id="None" /> Non-spécial <input type="radio" name="powerup" id="EX" /> Pokémon-EX <input type="radio" name="powerup" id="GX" /> Pokémon-GX
 <table name="infobox carte" id="infobox_carte" style="border:skyblue 3px solid">
 <tr><td class="top title">Nom</td><td><input id="Nom" /></td></tr>
 <tr><td class="title">Nom Anglais</td><td><input id="Nom_Eng" /></td></tr>
@@ -38,10 +38,11 @@ Infobox Carte <input type="checkbox" id="EX" /> Pokémon-EX
 <tr><td class="bottom title">Illustrateur</td><td><input id="Illustrateur" /></td></tr>
 </table>
 <tr><td>
-Catégorie 1<sup>er</sup> emplacement <select id="firstCap" onload="eventFire(this.id,'click')" onclick="editSpan();"><option></option><option id="changeable">Cap.Spé./Talent</option><option>Attaque</option></select> <input type="checkbox" id="secondSpot" /> Disponibilité 2ème emplacement
+Catégorie 1<sup>er</sup> emplacement <select id="firstCap" onload="eventFire(this.id,'click')" onclick="editSpan();"><option></option><option id="changeable">Cap.Spé./Talent</option><option>Attaque</option></select> <input type="checkbox" id="secondSpot" /> <u title="Hors capacité GX"> Disponibilité 2ème emplacement</u> <input type="checkbox" disabled="disabled" id="GX_move" /> 3<sup>ème</sup> emplacement (pour Pokémon-GX)
 </td></tr>
 <tr id="AtksSpot1"><td></td></tr>
 <tr id="AtksSpot2"><td></td></tr>
+<tr id="AtksSpotGX"><td></td></tr>
 <tr id="PkmnDesc"><td><textarea placeholder="Description du Pokémon" cols=40 id="pkmn_desc"></textarea>	Correspond à <select id="version"><option></option><option value="N">Pokémon Noir</option><option value="Blc">Pokémon Blanc</option><option value="NB">Pokémon Noir et Blanc</option><option value="N2">Pokémon Noir 2</option><option value="B2">Pokémon Blanc 2</option><option value="NB2">Pokémon Noir et Blanc 2</option><option value="X">Pokémon X</option><option value="Y">Pokémon Y</option><option value="XY">Pokémon X et Y</option></select></td></tr>
 <tr id="Remarques"><td><ul><li><input type="checkbox" disabled="disabled" id="Spot1Obtainable" /> <span id="emplacement1_type">(Choisir la catégorie)</span></li>
 							<li><input disabled="disabled" type="checkbox" id="Spot2Obtainable" /> <span id="2ndSpotText">Attaque 2</span> apprenable</li>
