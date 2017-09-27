@@ -22,7 +22,7 @@ function GeneratePokémon(){
 	}
 	var powerUpText = isPoweredUp?valeur_texte[$("input[name='powerup']:checked").prop("id")]:"";
 	var numéroCarte = Number(document.getElementById("Numéro_carte").value);
-	var numéroCarteMax = MaxSetCarte[extension];
+	var numéroCarteMax = MaxSetCarte[extension]?MaxSetCarte[extension]:document.getElementById("Numéro_carte_max").value;
 	var type = document.getElementById("Type").value;
 	var pv = document.getElementById("PV").value;
 	var faiblesse = document.getElementById("Faiblesse").value.toLowerCase();
@@ -92,10 +92,6 @@ function GeneratePokémon(){
 			else {
 				AtkText += "}}";
 			}
-		}
-		else {
-			alert("Merci de bien vérifier si vous avez correctement listé vos capacités.");
-			return false;
 		}
 	}
 	PokéText += AtkText;
