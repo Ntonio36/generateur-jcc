@@ -55,7 +55,7 @@ function GeneratePokémon(){
 		TEXTAREA.value = "";
 	}
 	
-	PokéText = "{{Ruban Carte JCC\n| extension = "+extension + "\n| carteprécédente = "+nom_précédent+"\n| pageprécédente = " +nom_précédent+ " ("+extension+" " + (numéroCarte-1) + ")\n| cartesuivante = " +nom_suivant + "\n| pagesuivante = " + nom_suivant + " ("+extension+" " + (numéroCarte+1) + ")\n}} \n{{Infobox Carte \n| nom = "+nom+(isEX||isGX?"[[Fichier:JCC-"+powerUpText+".png|30px|-"+powerUpText+"]]":"")+ "\n| nomen = "+nomAnglais+(isEX||isGX?"[[Fichier:JCC-"+powerUpText+".png|30px|-"+powerUpText+"]]":"")+" \n| nomja = "+nomJap+(isEX||isGX?powerUpText:"")+" \n| catégorie = Pokémon\n" + (isEX||isGX?"| nomréel = " + nom+"\n| sous-catégorie = "+powerUpText+"\n":"") + "| extension = "+extension+" \n| numerocarte = "+numéroCarte+" \n| maxsetcarte = "+numéroCarteMax+ "\n| type = " + type.toLowerCase() + "\n| pv = " + pv + (faiblesse!=""?"\n| faiblesse = " + faiblesse + (faib_val !=undefined?"\n| faiblesse-val = "+faib_val:""):"") +(résistance?"\n| resist = " + résistance + "\n" + (resist_val !=undefined?"| resist-val = "+resist_val:"| resist-val = -20"):"") + "\n" + (stade >= 1?"| stade = " + stade+"\n":"") + "| retraite = " + retraite + "\n| rareté = " + (isEX||isGX?"ultra rare":rareté) + "\n| illus = " + illustrateur + "\n}}\n"; // Ruban + Infobox
+	PokéText = "{{Ruban Carte JCC\n| extension = "+extension + "\n| carteprécédente = "+nom_précédent+"\n| pageprécédente = " +nom_précédent+ " ("+extension+" " + Number(numéroCarte-1) + ")\n| cartesuivante = " +nom_suivant + "\n| pagesuivante = " + nom_suivant + " ("+extension+" " + Number(numéroCarte+1) + ")\n}} \n{{Infobox Carte \n| nom = "+nom+(isEX||isGX?"[[Fichier:JCC-"+powerUpText+".png|30px|-"+powerUpText+"]]":"")+ "\n| nomen = "+nomAnglais+(isEX||isGX?"[[Fichier:JCC-"+powerUpText+".png|30px|-"+powerUpText+"]]":"")+" \n| nomja = "+nomJap+(isEX||isGX?powerUpText:"")+" \n| catégorie = Pokémon\n" + (isEX||isGX?"| nomréel = " + nom+"\n| sous-catégorie = "+powerUpText+"\n":"") + "| extension = "+extension+" \n| numerocarte = "+numéroCarte+" \n| maxsetcarte = "+numéroCarteMax+ "\n| type = " + type.toLowerCase() + "\n| pv = " + pv + (faiblesse!=""?"\n| faiblesse = " + faiblesse + (faib_val !=undefined?"\n| faiblesse-val = "+faib_val:""):"") +(résistance?"\n| resist = " + résistance + "\n" + (resist_val !=undefined?"| resist-val = "+resist_val:"| resist-val = -20"):"") + "\n" + (stade >= 1?"| stade = " + stade+"\n":"") + "| retraite = " + retraite + "\n| rareté = " + (isEX||isGX?"ultra rare":rareté) + "\n| illus = " + illustrateur + "\n}}\n"; // Ruban + Infobox
 	
 	PokéText += "'''"+nom+(isEX||isGX?"[[Fichier:JCC-"+powerUpText+".png|-"+powerUpText+"|30px]]":"")+"''' est une "+(isEX||isGX?"[[Carte Pokémon|carte]] [[Pokémon-"+powerUpText+"]] ":"[[carte Pokémon]] ")+ "de l'[[extension]] [["+extension+"]], à l'effigie du Pokémon ''homonyme'' [[" +nom+"]]."+(stade !="Base" && stade !="" && document.getElementById("preEvoName").style != "visibility:hidden"?" Elle doit être posée sur un [[:Catégorie:Carte Pokémon représentant "+preEvoName+"|"+preEvoName+"]] pour pouvoir être jouée.":"")+"\n\n"; //Introduction
 	var AtkText = "== Facultés ==\n\n";
@@ -75,24 +75,22 @@ function GeneratePokémon(){
 			if(isGX && typeCap1 === "Talent"){
 				AtkText += "| type2 = " + adjustFinalText(document.getElementById("TypeGX")) + "\n| nom2 = " + document.getElementById("NomGX").value + " \n| description2 = "+ document.getElementById("DescGX").value+"<sub>(Vous ne pouvez utiliser qu’une attaque GX par partie.)</sub>" + " \n| dégâts2 = " + replaceX(document.getElementById("DégâtsGX").value)+"\n";
 			}
-			AtkText += "}}";
 		}
+		AtkText += "}}";
 	}
 	else if(typeCap1 === "Attaque"){
 		AtkText += "=== [[Attaque (JCC)|Attaque"+(is2ndAtk||isGX?"s":"") + "]] ===\n\n";
 		AtkText += "{{Infobox Faculté (JCC)\n| type = " + adjustFinalText(document.getElementById("Type1")) + "\n| nom = " + document.getElementById("Nom1").value + "\n| description = " + document.getElementById("Description1").value + "\n| dégâts = " + replaceX(document.getElementById("Dégâts1").value)+"\n";
 		if(!is2ndAtk && isGX){
-			AtkText += "| type2 = " + adjustFinalText(document.getElementById("TypeGX"))+"\n| nom2 = " + document.getElementById("NomGX").value + "\n| description2 = "+document.getElementById("DescriptionGX").value+"<sub>(Vous ne pouvez utiliser qu’une attaque GX par partie.)</sub>\n| dégâts2 = " + replaceX(document.getElementById("DégâtsGX").value)+"\n}}";
+			AtkText += "| type2 = " + adjustFinalText(document.getElementById("TypeGX"))+"\n| nom2 = " + document.getElementById("NomGX").value + "\n| description2 = "+document.getElementById("DescriptionGX").value+"<sub>(Vous ne pouvez utiliser qu’une attaque GX par partie.)</sub>\n| dégâts2 = " + replaceX(document.getElementById("DégâtsGX").value)+"\n";
 		}
 		else if(is2ndAtk){
 			AtkText += "| type2 = " + adjustFinalText(document.getElementById("Type2"))+"\n| nom2 = " + document.getElementById("Nom2").value + "\n| description2 = "+document.getElementById("Desc2").value+"\n| dégâts2 = " + replaceX(document.getElementById("Dégâts2").value)+"\n";
 			if(isGX){
-				AtkText += "| type3 = " + adjustFinalText(document.getElementById("TypeGX"))+"\n| nom3 = " + document.getElementById("NomGX").value + "\n| description3 = "+document.getElementById("DescGX").value+"\n| dégâts3 = " + replaceX(document.getElementById("DégâtsGX").value)+"\n}}";
-			}
-			else {
-				AtkText += "}}";
+				AtkText += "| type3 = " + adjustFinalText(document.getElementById("TypeGX"))+"\n| nom3 = " + document.getElementById("NomGX").value + "\n| description3 = "+document.getElementById("DescGX").value+"\n| dégâts3 = " + replaceX(document.getElementById("DégâtsGX").value)+"\n";
 			}
 		}
+		AtkText += "}}";
 	}
 	PokéText += AtkText;
 	if(isEX || isGX){
@@ -120,6 +118,19 @@ function GeneratePokémon(){
 		}
 		if((canSpot2 && !canSpot1) || (canSpot2 && ["Talent","Cap.Spé."].indexOf(typeCap1) !== -1)){
 		PokéText +="* [["+document.getElementById("Nom2").value + "]] est une [[Capacité|attaque]] des jeux vidéo que " + nom + " peut apprendre."; 
+		}
+	}
+	if(réédition_flag){
+		PokéText += "\n";
+		var Réédition_Type = document.getElementById("TypeRéédition").value;
+		var otherNumber = document.getElementById("numéroRéédit").value;
+		var otherExpansion = document.getElementById("ExtensionRéédit").value;
+		switch(Réédition_Type){
+			case "réédition" : PokéText += "* Cette carte est une [["+nom+getPowerUp()+" ("+otherExpansion+" "+otherNumber+")|réédition]] de l'[[extension]] [["+otherExpansion+"]].";
+			break;
+			case "rééditée" : PokéText += "* Cette carte a été [["+nom+getPowerUp()+" ("+otherExpansion+" "+otherNumber+")|rééditée]] dans l'[[extension]] [["+otherExpansion+"]].";
+			break;
+			default : "";
 		}
 	}
 	
