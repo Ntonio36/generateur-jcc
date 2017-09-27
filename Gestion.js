@@ -4,7 +4,8 @@
 */
 var typeCap1 = "";
 
-var extensionsExistantes = ["Noir & Blanc Tempête Plasma","Noir & Blanc Explosion Plasma","Noir & Blanc Glaciation Plasma","XY","XY Bienvenue à Kalos","XY Étincelles","XY Poings Furieux","XY Primo Choc","XY Vigueur Spectrale","XY Ciel Rugissant","XY Origines Antiques","XY Impulsion TURBO","XY Rupture TURBO","Générations","XY Impact des Destins","XY Offensive Vapeur","XY Évolutions","Soleil et Lune","Soleil et Lune Gardiens Ascendants","Soleil et Lune Ombres Ardentes","Promo BW","Promo SL","Promo XY"];
+var extensionsExistantes = ["Expedition","Aquapolis","EX Tempête de Sable","EX Dragon","EX Team Magma VS Team Aqua","EX Légendes Oubliées","EX Rouge Feu & Vert Feuille","EX Forces Cachées","EX Espèces Delta","EX Créateurs de Légendes","EX Fantômes Holon","EX Gardiens de Cristal","EX Île des Dragons","EX Gardiens du Pouvoir","Diamant & Perle Trésors Mystérieux","Diamant & Perle Merveilles Secrètes","Diamant & Perle Duels au sommet","Diamant & Perle Aube Majestueuse","Diamant & Perle Éveil des Légendes","Diamant & Perle Tempête","Platine","Platine Rivaux Émergents","Platine Vainqueurs Suprêmes","HeartGold SoulSilver","HS Déchaînement","HS Indomptable","HS Triomphe","L'Appel des Légendes","Noir & Blanc Tempête Plasma","Noir & Blanc Explosion Plasma","Noir & Blanc Glaciation Plasma","XY","XY Bienvenue à Kalos","XY Étincelles","XY Poings Furieux","XY Primo Choc","XY Vigueur Spectrale","XY Ciel Rugissant","XY Origines Antiques","XY Impulsion TURBO","XY Rupture TURBO","Générations","XY Impact des Destins","XY Offensive Vapeur","XY Évolutions","Soleil et Lune","Soleil et Lune Gardiens Ascendants","Soleil et Lune Ombres Ardentes","Promo BW","Promo SL","Promo XY"];
+
 
 function editSpan(){
 	 toggleGray(["Talent","Cap.Spé.","Attaque"].indexOf(document.getElementById("firstCap").value) == -1,"#Spot1Obtainable");
@@ -24,11 +25,13 @@ function editSpan(){
 }
 
 $("#EX, #GX, #None").click(function(){
-	toggleGray($(this).prop("checked").prop("id") === "EX" || $(this).prop("checked").prop("id") === "GX","#pkmn_desc, #Evo, #version, #Rareté");
+	var THIS = $("input[name='powerup']:checked").prop("id");
+	toggleGray(THIS === "EX","#pkmn_desc, #Evo, #version, #Rareté");
+	toggleGray(THIS === "GX","#pkmn_desc, #version, #Rareté");
 });
 
-function checkSeries(){
-	var extension = document.getElementById("Extension");
+function checkSeries(modifier){
+	var extension = document.getElementById("Extension"+modifier);
 	var valeur_extension = extension.value;
 	if(extensionsExistantes.indexOf(valeur_extension) === -1){
 		// Si l'user se trompe d'orthographe de série
@@ -41,11 +44,11 @@ function checkSeries(){
 	}
 	else {
 		toggleGray(valeur_extension.indexOf("Noir & Blanc") !== -1 || valeur_extension.indexOf("BW") !== -1, "#GX");
-		if(valeur_extension.indexOf("Noir & Blanc") !== -1 || valeur_extension.indexOf("BW") !== -1){
-			document.getElementById("changeable").innerHTML = "Cap.Spé.";
-		}
-		else if(valeur_extension.indexOf("SM") !== -1 || valeur_extension.indexOf("XY") !== -1 || valeur_extension.indexOf("Soleil et Lune") !== -1){
+		if(valeur_extension.indexOf("SM") !== -1 || valeur_extension.indexOf("XY") !== -1 || valeur_extension.indexOf("Soleil et Lune") !== -1){
 			document.getElementById("changeable").innerHTML = "Talent";
+		}
+		else {
+			document.getElementById("changeable").innerHTML = "Cap.Spé.";
 		}
 	}
 }
@@ -53,7 +56,13 @@ function checkSeries(){
 document.getElementById("Extension").addEventListener("change",function(){
 	var MaxNumExists = (MaxSetCarte[this.value] != undefined);
 	toggleGray(MaxNumExists,"#Numéro_carte_max");
-	checkSeries();
+	checkSeries("");
+});
+
+document.getElementById("Extension_dres").addEventListener("change",function(){
+	var MaxNumExists = (MaxSetCarte[this.value] != undefined);
+	toggleGray(MaxNumExists,"#Numéro_carte_max_dres");
+	checkSeries("_dres");
 });
 
 document.getElementById("Evo").addEventListener("click",function(){
@@ -70,6 +79,21 @@ document.getElementById("Evo").addEventListener("click",function(){
 });
 
 var allElements = [];
+var réédition_flag = false;
+
+$("#réédition").click(function(){
+	toggleGray(!this.checked,"#TypeRéédition");
+	var isDisabled = $("#TypeRéédition").prop("disabled");
+	if(isDisabled){
+			$("#réédition_texte").css("visibility","hidden");
+			document.getElementById("TypeRéédition").firstChild.selected = "selected";
+			réédition_flag = false;
+	}
+	else {
+		$("#réédition_texte").css("visibility","");
+		réédition_flag = true;
+	}
+});
 
 $("#secondSpot").click(function(){
 	if($(this).prop("checked")){
@@ -208,6 +232,34 @@ $("input#Résistance_Défaut").click(function(){
 });
 
 var MaxSetCarte = {
+	"Expedition" : 165,
+	"Aquapolis" : 186,
+	"EX Tempête de Sable" : 100,
+	"EX Dragon" : 100,
+	"EX Team Magma VS Team Aqua" : 97,
+	"EX Légendes Oubliées" : 102,
+	"EX Rouge Feu & Vert Feuille" : 116,
+	"EX Forces Cachées" : 145,
+	"EX Espèces Delta" : 114,
+	"EX Créateurs de Légendes" : 93,
+	"EX Fantômes Holon" : 111,
+	"EX Gardiens de Cristal" : 100,
+	"EX Île des Dragons" : 101,
+	"EX Gardiens du Pouvoir" : 108,
+	"Diamant & Perle Trésors Mystérieux" : 124,
+	"Diamant & Perle Merveilles Secrètes" : 132,
+	"Diamant & Perle Duels au sommet" : 106,
+	"Diamant & Perle Aube Majestueuse" : 100,
+	"Diamant & Perle Éveil des Légendes" : 146,
+	"Diamant & Perle Tempête" : 106,
+	"Platine" : 133,
+	"Platine Rivaux Émergents" : 120,
+	"Platine Vainqueurs Suprêmes" : 162,
+	"HeartGold SoulSilver" : 124,
+	"HS Déchaînement" : 96,
+	"HS Indomptable" : 91,
+	"HS Triomphe" : 102,
+	"L'Appel des Légendes" : 106,
 	"Noir & Blanc Tempête Plasma" : 135,
 	"Noir & Blanc Explosion Plasma" : 101,
 	"Noir & Blanc Glaciation Plasma" : 116,
@@ -231,6 +283,34 @@ var MaxSetCarte = {
 };
 
 var EngExt = {
+	"Expedition" : "Expedition Base Set",
+	"Aquapolis" : "Aquapolis",
+	"EX Tempête de Sable" : "EX Sandstorm",
+	"EX Dragon" : "EX Dragon",
+	"EX Team Magma VS Team Aqua" : "EX Team Magma vs Team Aqua",
+	"EX Légendes Oubliées" : "EX Hidden Legends",
+	"EX Rouge Feu & Vert Feuille" : "EX FireRed & LeafGreen",
+	"EX Forces Cachées" : "EX Unseen Forces",
+	"EX Espèces Delta" : "EX Delta Species",
+	"EX Créateurs de Légendes" : "EX Legend Makers",
+	"EX Fantômes Holon" : "EX Holon Phantoms",
+	"EX Gardiens de Cristal" : "EX Crystal Guardians",
+	"EX Île des Dragons" : "EX Dragon Frontiers",
+	"EX Gardiens du Pouvoir" : "EX Power Keepers",
+	"Diamant & Perle Trésors Mystérieux" : "Mysterious Treasures",
+	"Diamant & Perle Merveilles Secrètes" : "Secret Wonders",
+	"Diamant & Perle Duels au sommet" : "Great Encounters",
+	"Diamant & Perle Aube Majestueuse" : "Majestic Dawn",
+	"Diamant & Perle Éveil des Légendes" : "Legends Awakened",
+	"Diamant & Perle Tempête" : "Stormfront",
+	"Platine" : "Platinum",
+	"Platine Rivaux Émergents" : "Rising Rivals",
+	"Platine Vainqueurs Suprêmes" : "Supreme Victors",
+	"HeartGold SoulSilver" : "HeartGold & SoulSilver",
+	"HS Déchaînement" : "Unleashed",
+	"HS Indomptable" : "Undaunted",
+	"HS Triomphe" : "Triumphant",
+	"L'Appel des Légendes" : "Call of Legends",
 	"Noir & Blanc Tempête Plasma" : "Plasma Storm",
 	"Noir & Blanc Explosion Plasma" : "Plasma Explosion",
 	"Noir & Blanc Glaciation Plasma" : "Plasma Freeze",
@@ -264,8 +344,7 @@ function littleclr(){
 }
 var bulbaInterwikiRegex = /\[\[[de|zh|ja]{2}:.{1,}?\]\]/g // [[de:Kyurem Blanc est le meilleur 36]]
 
-function getInterwiki(kind){
-	var modifier = kind==="Pokémon"?"":"_dres";
+function getInterwiki(){
 	function getPowerUp(){
 		if(isEX){
 			return "-EX";
@@ -277,12 +356,12 @@ function getInterwiki(kind){
 	}
 	var nomAnglais = document.getElementById("Nom_Eng").value;
 	var Y = "";
-	var extension = document.getElementById("Extension"+modifier).value;
+	var extension = document.getElementById("Extension").value;
 	var EnglishExtension = EngExt[extension].replace(/ /,"_");
 	$.ajax({
 		type: "GET",
 		url: 'http://whateverorigin.org/get?url=' + 
-		encodeURIComponent('http://bulbapedia.bulbagarden.net/wiki/'+(nomAnglais+getPowerUp()+"_("+EnglishExtension+"_"+document.getElementById("Numéro_carte"+modifier).value+")?action=edit")) + '&callback=?',
+		encodeURIComponent('http://bulbapedia.bulbagarden.net/wiki/'+(nomAnglais+getPowerUp()+"_("+EnglishExtension+"_"+document.getElementById("Numéro_carte").value+")?action=edit")) + '&callback=?',
 		dataType: "jsonp",
 		success : function( data ) {
 			var X = extractContent(data.contents);
