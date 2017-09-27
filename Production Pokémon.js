@@ -31,7 +31,7 @@ function GeneratePokémon(){
 	var resist_val = $("#Résistance_Défaut").prop("checked")?undefined:document.getElementById("Résistance_Val").value;
 	var stade = document.getElementById("Evo").value;
 	var retraite = document.getElementById("Retraite").value;
-	var rareté = isEX || isGX?"ultra rare":document.getElementById("Rareté").value.toLowerCase();
+	var rareté = isEX?"ultra rare":(isGX?"":document.getElementById("Rareté").value.toLowerCase());
 	var illustrateur = document.getElementById("Illustrateur").value;
 	var is2ndAtk = $("#secondSpot").prop("checked");
 	
