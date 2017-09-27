@@ -79,7 +79,7 @@ function GeneratePokémon(){
 		}
 	}
 	else if(typeCap1 === "Attaque"){
-		AtkText += "=== [[Attaque (JCC)|Attaque"+(is2ndAtk||isGX?"s":"") + " ===\n\n";
+		AtkText += "=== [[Attaque (JCC)|Attaque"+(is2ndAtk||isGX?"s":"") + "]] ===\n\n";
 		AtkText += "{{Infobox Faculté (JCC)\n| type = " + adjustFinalText(document.getElementById("Type1")) + "\n| nom = " + document.getElementById("Nom1").value + "\n| description = " + document.getElementById("Description1").value + "\n| dégâts = " + replaceX(document.getElementById("Dégâts1").value)+"\n";
 		if(!is2ndAtk && isGX){
 			AtkText += "| type2 = " + adjustFinalText(document.getElementById("TypeGX"))+"\n| nom2 = " + document.getElementById("NomGX").value + "\n| description2 = "+document.getElementById("DescriptionGX").value+"<sub>(Vous ne pouvez utiliser qu’une attaque GX par partie.)</sub>\n| dégâts2 = " + replaceX(document.getElementById("DégâtsGX").value)+"\n}}";
