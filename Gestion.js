@@ -40,6 +40,7 @@ function checkSeries(){
 		});
 	}
 	else {
+		toggleGray(valeur_extension.indexOf("Noir & Blanc") !== -1 || valeur_extension.indexOf("BW") !== -1, "#GX");
 		if(valeur_extension.indexOf("Noir & Blanc") !== -1 || valeur_extension.indexOf("BW") !== -1){
 			document.getElementById("changeable").innerHTML = "Cap.Spé.";
 		}
