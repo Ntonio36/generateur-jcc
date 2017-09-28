@@ -35,7 +35,7 @@ function checkSeries(modifier){
 	var valeur_extension = extension.value;
 	if(extensionsExistantes.indexOf(valeur_extension) === -1){
 		// Si l'user se trompe d'orthographe de série
-		alert("Merci de choisir/corriger l'extension");
+		alert("Vous avez mal écrit l'extension choisie, ou alors elle est déjà terminée.");
 		$(extension).css("background-color","lightgreen");
 		document.getElementById("firstCap").getElementsByTagName("option")[0].selected = "selected";
 		$(extension).change(function(){
@@ -44,6 +44,7 @@ function checkSeries(modifier){
 	}
 	else {
 		toggleGray(valeur_extension.indexOf("Noir & Blanc") !== -1 || valeur_extension.indexOf("BW") !== -1, "#GX");
+		toggleGray(valeur_extension.indexOf("Soleil & Lune") !== -1 || valeur_extension.indexOf("SL") !== -1 || valeur_extension.indexOf("Soleil et Lune") !== -1, "#EX"); // Interdiction à une carte >=G7 d'être un Pokémon-EX
 		if(valeur_extension.indexOf("SM") !== -1 || valeur_extension.indexOf("XY") !== -1 || valeur_extension.indexOf("Soleil et Lune") !== -1){
 			document.getElementById("changeable").innerHTML = "Talent";
 		}
