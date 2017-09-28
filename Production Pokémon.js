@@ -42,7 +42,7 @@ function GeneratePokémon(){
 		var isMiddle = $("#middle_confirm").prop("checked");
 		var preEvoArray = document.getElementById("preEvoName").value.split(" ");
 		var preEvoName = preEvoArray[0];
-		var preEvoNumber = preEvoArray?document.getElementById("preEvoName").value.split(" ")[1]:numéroCarte-1;
+		var preEvoNumber = preEvoArray[1]?preEvoArray[1]:numéroCarte-1;
 	}
 	typeCap1 = document.getElementById("firstCap").value;
 	if(document.getElementById("Result") === null){
