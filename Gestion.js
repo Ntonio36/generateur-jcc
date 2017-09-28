@@ -371,10 +371,10 @@ function getInterwiki(){
 				alert("Merci de revérifier le nom anglais, l'extension et le numéro");
 			}
 			else {
-				takenLinks.splice(1,0,"[[en:"+(nomAnglais+(isEX?"-EX":""))+" ("+EnglishExtension.replace(/_/g," ")+" "+document.getElementById("Numéro_carte"+modifier).value+")]]"); // Insertion de l'interwiki anglais
+				takenLinks.splice(1,0,"[[en:"+(nomAnglais+(isEX?"-EX":""))+" ("+EnglishExtension.replace(/_/g," ")+" "+document.getElementById("Numéro_carte").value+")]]"); // Insertion de l'interwiki anglais
 				Y = takenLinks.toString().replace(/,/g,"\n");
-				document.getElementById("foreveralone"+modifier).innerHTML = Y;
-				eventFire(document.getElementById("foreveralone"+modifier),"click"); // dummy pour activer la sortie des liens
+				document.getElementById("foreveralone").innerHTML = Y;
+				eventFire(document.getElementById("foreveralone"),"click"); // dummy pour activer la sortie des liens
 			}
 		},
 		failure : function(){
