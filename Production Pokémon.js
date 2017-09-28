@@ -104,20 +104,20 @@ function GeneratePokémon(){
 	var canSpot2 = $("#Spot2Obtainable").prop("checked");
 	if(canSpot1 || canSpot2 || réédition_flag){
 		PokéText += "\n\n\n";
-		PokéText += "== Remarque"+(canSpot1?(["Talent","Cap.Spé."].indexOf(typeCap1) !== -1 && canSpot2?"s":""):"")+" ==\n\n";
+		PokéText += "== Remarque"+(canSpot1?(["Talent","Cap.Spé."].indexOf(typeCap1) !== -1 && canSpot2?"s":""):"")+" ==\n";
 		if(canSpot1){
 			switch(typeCap1){
 				case "Attaque" :
-					PokéText += "* [[" + document.getElementById("Nom1").value + "]] " +(canSpot2?"et [[" + document.getElementById("Nom2").value + "]] sont des [[Capacité|attaques]] ":"est une [[Capacité|attaque]] ") + "des jeux vidéo que [["+nom+"]] peut apprendre.\n";
+					PokéText += "\n* [[" + document.getElementById("Nom1").value + "]] " +(canSpot2?"et [[" + document.getElementById("Nom2").value + "]] sont des [[Capacité|attaques]] ":"est une [[Capacité|attaque]] ") + "des jeux vidéo que [["+nom+"]] peut apprendre.\n";
 					break;
 					case "Talent" :
-					case "Cap.Spé." : PokéText += "* [[" + document.getElementById("Nom1").value + "]] est un" + (typeCap1==="Talent"?" [[Talent]]":"e [[capacité spéciale]]") + " des jeux vidéo que [[" + nom + "]] peut avoir.\n";
+					case "Cap.Spé." : PokéText += "\n* [[" + document.getElementById("Nom1").value + "]] est un" + (typeCap1==="Talent"?" [[Talent]]":"e [[capacité spéciale]]") + " des jeux vidéo que [[" + nom + "]] peut avoir.";
 					break;
 					default : "";
 			}
 		}
 		if((canSpot2 && !canSpot1) || (canSpot2 && ["Talent","Cap.Spé."].indexOf(typeCap1) !== -1)){
-		PokéText +="* [["+document.getElementById("Nom2").value + "]] est une [[Capacité|attaque]] des jeux vidéo que " + nom + " peut apprendre."; 
+			PokéText +="\n* [["+document.getElementById("Nom2").value + "]] est une [[Capacité|attaque]] des jeux vidéo que " + nom + " peut apprendre."; 
 		}
 	}
 	if(réédition_flag){
