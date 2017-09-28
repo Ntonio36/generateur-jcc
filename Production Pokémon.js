@@ -102,7 +102,7 @@ function GeneratePokémon(){
 	
 	var canSpot1 = $("#Spot1Obtainable").prop("checked");
 	var canSpot2 = $("#Spot2Obtainable").prop("checked");
-	if(canSpot1 || canSpot2){
+	if(canSpot1 || canSpot2 || réédition_flag){
 		PokéText += "\n\n\n";
 		PokéText += "== Remarque"+(canSpot1?(["Talent","Cap.Spé."].indexOf(typeCap1) !== -1 && canSpot2?"s":""):"")+" ==\n\n";
 		if(canSpot1){
@@ -126,9 +126,9 @@ function GeneratePokémon(){
 		var otherNumber = document.getElementById("numéroRéédit").value;
 		var otherExpansion = document.getElementById("ExtensionRéédit").value;
 		switch(Réédition_Type){
-			case "réédition" : PokéText += "* Cette carte est une [["+nom+getPowerUp()+" ("+otherExpansion+" "+otherNumber+")|réédition]] de l'[[extension]] [["+otherExpansion+"]].";
+			case "réédition" : PokéText += "* Cette carte est une [["+nom+powerUpText+" ("+otherExpansion+" "+otherNumber+")|réédition]] de l'[[extension]] [["+otherExpansion+"]].";
 			break;
-			case "rééditée" : PokéText += "* Cette carte a été [["+nom+getPowerUp()+" ("+otherExpansion+" "+otherNumber+")|rééditée]] dans l'[[extension]] [["+otherExpansion+"]].";
+			case "rééditée" : PokéText += "* Cette carte a été [["+nom+powerUpText+" ("+otherExpansion+" "+otherNumber+")|rééditée]] dans l'[[extension]] [["+otherExpansion+"]].";
 			break;
 			default : "";
 		}
