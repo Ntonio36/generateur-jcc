@@ -24,10 +24,18 @@ function editSpan(){
 	generateSpot(1);
 }
 
-$("#EX, #GX, #None").click(function(){
-	var THIS = $("input[name='powerup']:checked").prop("id");
-	toggleGray(THIS === "EX","#pkmn_desc, #Evo, #version, #Rareté");
-	toggleGray(THIS === "GX","#pkmn_desc, #version, #Rareté");
+$("#EX").click(function(){
+	toggleGray(this.checked,"#pkmn_desc, #Evo, #version, #Rareté");
+});
+$("#GX").click(function(){
+	toggleGray(this.checked,"#pkmn_desc, #version, #Rareté");
+});
+$("#None").click(function(){
+	if(this.checked){
+		$("select, input, textarea").each(function(){
+			$(this).removeAttr("disabled"); // Libéréééééé délivréééééé
+		});
+	}
 });
 
 function checkSeries(modifier){
