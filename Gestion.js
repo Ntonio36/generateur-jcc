@@ -377,7 +377,7 @@ function getInterwiki(){
 			var takenLinks = X.match(bulbaInterwikiRegex); 
 			// on chope tous les liens interwiki de chez bulba (ils sont plus complets, tout ça...)
 			if(takenLinks === null){
-				Y = "[[en:"+(nomAnglais+(isEX || isGX?getPowerUp():""))+" ("+EnglishExtension.replace(/_/g," ")+" "+document.getElementById("Numéro_carte").value+")]]");
+				Y = "[[en:"+(nomAnglais+(isEX || isGX?getPowerUp():""))+" ("+EnglishExtension.replace(/_/g," ")+" "+document.getElementById("Numéro_carte").value+")]]";
 			}
 			else {
 				takenLinks.splice(1,0,"[[en:"+(nomAnglais+(isEX?"-EX":""))+" ("+EnglishExtension.replace(/_/g," ")+" "+document.getElementById("Numéro_carte").value+")]]"); // Insertion de l'interwiki anglais
