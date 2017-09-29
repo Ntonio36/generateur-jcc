@@ -6,7 +6,12 @@ var PokéText = "";
 var isEX;
 var isGX;
 function GeneratePokémon(){
+	var nomRéel = "";
 	var nom = document.getElementById("Nom").value;
+	if(nom.indexOf("d'Alola") !== -1){
+		nomRéel = nom;
+		nom = nom.replace("d'Alola","<small>d'Alola</small>");
+	}
 	var nom_précédent = document.getElementById("Nom_Précédent").value;
 	var nom_suivant = document.getElementById("Nom_Suivant").value;
 	var extension = document.getElementById("Extension").value;
@@ -55,7 +60,7 @@ function GeneratePokémon(){
 		TEXTAREA.value = "";
 	}
 	
-	PokéText = "{{Ruban Carte JCC\n| extension = "+extension + "\n| carteprécédente = "+nom_précédent+"\n| pageprécédente = " +nom_précédent+ " ("+extension+" " + Number(numéroCarte-1) + ")\n| cartesuivante = " +nom_suivant + "\n| pagesuivante = " + nom_suivant + " ("+extension+" " + Number(numéroCarte+1) + ")\n}} \n{{Infobox Carte \n| nom = "+nom+(isEX||isGX?"[[Fichier:JCC-"+powerUpText+".png|30px|-"+powerUpText+"]]":"")+ "\n| nomen = "+nomAnglais+(isEX||isGX?"[[Fichier:JCC-"+powerUpText+".png|30px|-"+powerUpText+"]]":"")+" \n| nomja = "+nomJap+(isEX||isGX?powerUpText:"")+" \n| catégorie = Pokémon\n" + (isEX||isGX?"| nomréel = " + nom+"\n| sous-catégorie = "+powerUpText+"\n":"") + "| extension = "+extension+" \n| numerocarte = "+numéroCarte+" \n| maxsetcarte = "+numéroCarteMax+ "\n| type = " + type.toLowerCase() + "\n| pv = " + pv + (faiblesse!=""?"\n| faiblesse = " + faiblesse + (faib_val !=undefined?"\n| faiblesse-val = "+faib_val:""):"") +(résistance?"\n| resist = " + résistance + "\n" + (resist_val !=undefined?"| resist-val = "+resist_val:"| resist-val = -20"):"") + "\n" + (stade >= 1?"| stade = " + stade+"\n":"") + "| retraite = " + retraite + "\n| rareté = " + (isEX||isGX?"ultra rare":rareté) + "\n| illus = " + illustrateur + "\n}}\n"; // Ruban + Infobox
+	PokéText = "{{Ruban Carte JCC\n| extension = "+extension + "\n| carteprécédente = "+nom_précédent+"\n| pageprécédente = " +nom_précédent+ " ("+extension+" " + Number(numéroCarte-1) + ")\n| cartesuivante = " +nom_suivant + "\n| pagesuivante = " + nom_suivant + " ("+extension+" " + Number(numéroCarte+1) + ")\n}} \n{{Infobox Carte \n| nom = "+nom+(isEX||isGX?"[[Fichier:JCC-"+powerUpText+".png|30px|-"+powerUpText+"]]":"")+ "\n| nomen = "+nomAnglais+(isEX||isGX?"[[Fichier:JCC-"+powerUpText+".png|30px|-"+powerUpText+"]]":"")+" \n| nomja = "+nomJap+(isEX||isGX?powerUpText:"")+" \n| catégorie = Pokémon\n" + (isEX||isGX?"| nomréel = " + (nomRéel != ""?nomRéel:nom)+"\n| sous-catégorie = "+powerUpText+"\n":"") + "| extension = "+extension+" \n| numerocarte = "+numéroCarte+" \n| maxsetcarte = "+numéroCarteMax+ "\n| type = " + type.toLowerCase() + "\n| pv = " + pv + (faiblesse!=""?"\n| faiblesse = " + faiblesse + (faib_val !=undefined?"\n| faiblesse-val = "+faib_val:""):"") +(résistance?"\n| resist = " + résistance + "\n" + (resist_val !=undefined?"| resist-val = "+resist_val:"| resist-val = -20"):"") + "\n" + (stade >= 1?"| stade = " + stade+"\n":"") + "| retraite = " + retraite + "\n| rareté = " + (isEX||isGX?"ultra rare":rareté) + "\n| illus = " + illustrateur + "\n}}\n"; // Ruban + Infobox
 	
 	PokéText += "'''"+nom+(isEX||isGX?"[[Fichier:JCC-"+powerUpText+".png|-"+powerUpText+"|30px]]":"")+"''' est une "+(isEX||isGX?"[[Carte Pokémon|carte]] [[Pokémon-"+powerUpText+"]] ":"[[carte Pokémon]] ")+ "de l'[[extension]] [["+extension+"]], à l'effigie du Pokémon ''homonyme'' [[" +nom+"]]."+(stade !="Base" && stade !="" && document.getElementById("preEvoName").style != "visibility:hidden"?" Elle doit être posée sur un [[:Catégorie:Carte Pokémon représentant "+preEvoName+"|"+preEvoName+"]] pour pouvoir être jouée.":"")+"\n\n"; //Introduction
 	var AtkText = "== Facultés ==\n\n";
