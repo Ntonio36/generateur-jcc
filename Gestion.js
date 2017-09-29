@@ -377,14 +377,14 @@ function getInterwiki(){
 			var takenLinks = X.match(bulbaInterwikiRegex); 
 			// on chope tous les liens interwiki de chez bulba (ils sont plus complets, tout ça...)
 			if(takenLinks === null){
-				alert("Merci de revérifier le nom anglais, l'extension et le numéro");
+				Y = "[[en:"+(nomAnglais+(isEX || isGX?getPowerUp():""))+" ("+EnglishExtension.replace(/_/g," ")+" "+document.getElementById("Numéro_carte").value+")]]");
 			}
 			else {
 				takenLinks.splice(1,0,"[[en:"+(nomAnglais+(isEX?"-EX":""))+" ("+EnglishExtension.replace(/_/g," ")+" "+document.getElementById("Numéro_carte").value+")]]"); // Insertion de l'interwiki anglais
 				Y = takenLinks.toString().replace(/,/g,"\n");
-				document.getElementById("foreveralone").innerHTML = Y;
-				eventFire(document.getElementById("foreveralone"),"click"); // dummy pour activer la sortie des liens
 			}
+			document.getElementById("foreveralone").innerHTML = Y;
+			eventFire(document.getElementById("foreveralone"),"click"); // dummy pour activer la sortie des liens
 		},
 		failure : function(){
 			alert("Erreur");
