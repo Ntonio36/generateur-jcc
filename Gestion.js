@@ -4,7 +4,7 @@
 */
 var typeCap1 = "";
 
-var extensionsExistantes = ["Expedition","Aquapolis","EX Tempête de Sable","EX Dragon","EX Team Magma VS Team Aqua","EX Légendes Oubliées","EX Rouge Feu & Vert Feuille","EX Forces Cachées","EX Espèces Delta","EX Créateurs de Légendes","EX Fantômes Holon","EX Gardiens de Cristal","EX Île des Dragons","EX Gardiens du Pouvoir","Diamant & Perle Trésors Mystérieux","Diamant & Perle Merveilles Secrètes","Diamant & Perle Duels au sommet","Diamant & Perle Aube Majestueuse","Diamant & Perle Éveil des Légendes","Diamant & Perle Tempête","Platine","Platine Rivaux Émergents","Platine Vainqueurs Suprêmes","HeartGold SoulSilver","HS Déchaînement","HS Indomptable","HS Triomphe","L'Appel des Légendes","Noir & Blanc Tempête Plasma","Noir & Blanc Explosion Plasma","Noir & Blanc Glaciation Plasma","XY","XY Bienvenue à Kalos","XY Étincelles","XY Poings Furieux","XY Primo Choc","XY Vigueur Spectrale","XY Ciel Rugissant","XY Origines Antiques","XY Impulsion TURBO","XY Rupture TURBO","Générations","XY Impact des Destins","XY Offensive Vapeur","XY Évolutions","Soleil et Lune","Soleil et Lune Gardiens Ascendants","Soleil et Lune Ombres Ardentes","Promo BW","Promo SL","Promo XY"];
+var extensionsExistantes = ["Expedition","Aquapolis","EX Tempête de Sable","EX Dragon","EX Team Magma VS Team Aqua","EX Légendes Oubliées","EX Rouge Feu & Vert Feuille","EX Forces Cachées","EX Espèces Delta","EX Créateurs de Légendes","EX Fantômes Holon","EX Gardiens de Cristal","EX Île des Dragons","EX Gardiens du Pouvoir","Diamant & Perle Trésors Mystérieux","Diamant & Perle Merveilles Secrètes","Diamant & Perle Duels au sommet","Diamant & Perle Aube Majestueuse","Diamant & Perle Éveil des Légendes","Diamant & Perle Tempête","Platine","Platine Rivaux Émergents","Platine Vainqueurs Suprêmes","HeartGold SoulSilver","HS Déchaînement","HS Indomptable","HS Triomphe","L'Appel des Légendes","Noir & Blanc Tempête Plasma","Noir & Blanc Explosion Plasma","Noir & Blanc Glaciation Plasma","XY","XY Bienvenue à Kalos","XY Étincelles","XY Poings Furieux","XY Primo Choc","XY Vigueur Spectrale","XY Ciel Rugissant","XY Origines Antiques","XY Impulsion TURBO","XY Rupture TURBO","Générations","XY Impact des Destins","XY Offensive Vapeur","XY Évolutions","Soleil et Lune","Soleil et Lune Gardiens Ascendants","Soleil et Lune Ombres Ardentes","Promo BW","Promo SM","Promo XY"];
 
 
 function editSpan(){
@@ -340,6 +340,9 @@ var EngExt = {
 	"Soleil et Lune" : "Sun & Moon",
 	"Soleil et Lune Gardiens Ascendants" : "Guardians Rising",
 	"Soleil et Lune Ombres Ardentes" : "Burning Shadows",
+	"Promo SM" : "SM Promo",
+	"Promo BW" : "BW Promo",
+	"Promo DP" : "DP Promo",
 	"" : ""
 };
 
