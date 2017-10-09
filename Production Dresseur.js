@@ -20,11 +20,11 @@ function GenerateTrainer(){
 	var illustrateur = document.getElementById("Illustrateur_dres").value;
 	var effet = document.getElementById("effet_carte").value;
 	var remarqueAdditionnelle = "";
-	var isTool = ["Outil Pokémon","HIGH TECH"].indexOf(catégorie) != -1;
+	var isTool = ["Outil Pokémon","HIGH-TECH"].indexOf(catégorie) != -1;
 	var isObjet = isTool || catégorie === "Objet";
-	var isHIGHTECH = catégorie === "HIGH TECH";
+	var isHIGHTECH = catégorie === "HIGH-TECH";
 	var highTechCase = [];
-	if(catégorie === "HIGH TECH"){
+	if(catégorie === "HIGH-TECH"){
 		highTechCase = ["Vous pouvez jouer autant de [[Carte Objet|cartes Objet]] que vous le voulez pendant votre tour ''(avant votre attaque)''.","Vous ne pouvez pas avoir plus d'une [[carte HIGH-TECH]] dans votre [[deck]]."];
 	}
 	else {
@@ -38,7 +38,7 @@ function GenerateTrainer(){
 			default : "";
 		}
 	}
-	TrainerText = "{{Ruban Carte JCC\n| extension = "+extension + "\n| carteprécédente = "+nom_précédent+"\n| pageprécédente = " +nom_précédent+ " ("+extension+" " + (numéroCarte-1) + ")\n| cartesuivante = " +nom_suivant + "\n| pagesuivante = " + nom_suivant + " ("+extension+" " + Number(numéroCarte+1) + ")\n}} \n{{Infobox Carte \n| nom = "+nom+"\n| nomen = "+nomAnglais+"\n| nomja = "+nomJA+"\n| catégorie = Dresseur\n| sous-catégorie"+(isObjet?(isTool?"1":"")+" = Objet":" = " +catégorie)+(isTool?"\n| sous-catégorie2 = Outil Pokémon" + (isHIGHTECH?"\n| sous-catégorie3 = HIGH TECH":""):"")+"\n| extension = "+extension+"\n| numerocarte = "+numéroCarte+"\n| maxsetcarte = "+maxSetCarte+"\n| rareté = "+rareté.toLowerCase()+"\n| illus = " + illustrateur+"\n}}\n\n__TOC__\n\n'''"+nom+"''' est une [[Carte Dresseur (JCC)|carte]] "+"[[Carte "+catégorie+"|"+catégorie+"]] de l'[[extension]] [["+extension+"]].\n\n== Facultés ==\n\n{{Infobox Faculté (JCC)\n| description = "+(isObjet?"<small>Attachez un [[Carte Outil Pokémon|Outil Pokémon]] à 1 de vos Pokémon auquel un Outil Pokémon n'est pas déjà attaché.</small><br /><br />":"")+effet+"\n}}\n\n";
+	TrainerText = "{{Ruban Carte JCC\n| extension = "+extension + "\n| carteprécédente = "+nom_précédent+"\n| pageprécédente = " +nom_précédent+ " ("+extension+" " + (numéroCarte-1) + ")\n| cartesuivante = " +nom_suivant + "\n| pagesuivante = " + nom_suivant + " ("+extension+" " + Number(numéroCarte+1) + ")\n}} \n{{Infobox Carte \n| nom = "+nom+"\n| nomen = "+nomAnglais+"\n| nomja = "+nomJA+"\n| catégorie = Dresseur\n| sous-catégorie"+(isObjet?(isTool?"1":"")+" = Objet":" = " +catégorie)+(isTool?"\n| sous-catégorie2 = Outil Pokémon" + (isHIGHTECH?"\n| sous-catégorie3 = HIGH-TECH":""):"")+"\n| extension = "+extension+"\n| numerocarte = "+numéroCarte+"\n| maxsetcarte = "+maxSetCarte+"\n| rareté = "+rareté.toLowerCase()+"\n| illus = " + illustrateur+"\n}}\n\n__TOC__\n\n'''"+nom+"''' est une [[Carte Dresseur (JCC)|carte]] "+"[[Carte "+catégorie+"|"+catégorie+"]] de l'[[extension]] [["+extension+"]].\n\n== Facultés ==\n\n{{Infobox Faculté (JCC)\n| description = "+(isObjet?"<small>Attachez un [[Carte Outil Pokémon|Outil Pokémon]] à 1 de vos Pokémon auquel un Outil Pokémon n'est pas déjà attaché.</small><br /><br />":"")+effet+"\n}}\n\n";
 	var règleSupplémentaire = "";
 	var isPlural = false;
 	switch(catégorie){
@@ -48,7 +48,7 @@ function GenerateTrainer(){
 		break;
 		case "Supporter" : règleSupplémentaire = "Vous ne pouvez jouer qu'une seule [[carte Supporter]] pendant votre tour ''(avant votre [[Attaque (JCC)|attaque]])''.";
 		break;
-		case "HIGH TECH" : 
+		case "HIGH-TECH" : 
 			isPlural = true;
 		break;
 		default : "";
