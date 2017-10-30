@@ -171,4 +171,7 @@ function GeneratePokémon(){
 		$("#compileResult td").append(TEXTAREA); // N'est supposé fonctionner que la première fois
 	}
 	document.getElementById("showNotice").innerHTML = "<font style='color:red; font-weight:bold;'>/!\\ ATTENTION /!\\ :</font> Il se peut que vous deviez toujours rajouter/retirer des informations, en fonction de la carte que vous créez.";
+	var EnglishExpansion = EngExt[extension].replace(/ /g,"_");
+	var url = "https://bulbapedia.bulbagarden.net/wiki/"+nomAnglais+"_("+EnglishExpansion+"_"+numéroCarte+")?action=edit";
+	document.getElementById("ajaxShowStatus").innerHTML = "Merci de copier/coller les liens interwiki depuis <a href='"+url+"'>ce lien</a>.";
 }
