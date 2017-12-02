@@ -42,7 +42,8 @@ function GenerateTrainer(){
 	var règleSupplémentaire = "";
 	var isPlural = false;
 	switch(catégorie){
-		case "Objet" : règleSupplémentaire = "Vous pouvez jouez autant de [[Carte Objet|cartes Objet]] que vous le voulez pendant votre tour ''(avant votre [[Attaque (JCC)|attaque]])''.";
+		case "Objet" : 
+		case "Outil Pokémon" : règleSupplémentaire = "Vous pouvez jouez autant de [[Carte Objet|cartes Objet]] que vous le voulez pendant votre tour ''(avant votre [[Attaque (JCC)|attaque]])''.";
 		break;
 		case "Stade" : règleSupplémentaire = "Cette carte reste en jeu lorsque vous la jouez. [[Défausse]]z cette carte si une autre [[carte Stade]] est jouée. Si une autre carte du même nom est en jeu, vous ne pouvez pas jouer cette carte.";
 		break;
