@@ -321,7 +321,7 @@ var EngExt = {
 	"HS Triomphe" : "Triumphant",
 	"L'Appel des Légendes" : "Call of Legends",
 	"Noir & Blanc Tempête Plasma" : "Plasma Storm",
-	"Noir & Blanc Explosion Plasma" : "Plasma Explosion",
+	"Noir & Blanc Explosion Plasma" : "Plasma Blast",
 	"Noir & Blanc Glaciation Plasma" : "Plasma Freeze",
 	"XY" : "XY",
 	"XY Bienvenue à Kalos" : "Kalos Starter Set",
